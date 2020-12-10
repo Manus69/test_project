@@ -32,6 +32,8 @@ namespace AspNetCoreTodo.Controllers
             {
                 Items = items
             };
+
+            
             return View(model);
         }
 
@@ -53,6 +55,9 @@ namespace AspNetCoreTodo.Controllers
                 return BadRequest("Could not add item.");
             }
 
+            string currentTime = DateTime.Now.ToString("HH:mm:ss tt");
+            Logger.log(Constants.FileName, $"{currentUser.Email} is adding an item at {currentTime}\n");
+
             return RedirectToAction("Index");
         }
         
@@ -72,7 +77,7 @@ namespace AspNetCoreTodo.Controllers
             {
                 return BadRequest("Could not mark item as done.");
             }
-            
+
             return RedirectToAction("Index");
         }
     }
